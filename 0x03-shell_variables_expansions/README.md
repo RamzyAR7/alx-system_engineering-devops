@@ -1,1 +1,1 @@
-my readme
+my readme for shell variables
