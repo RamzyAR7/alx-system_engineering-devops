@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 # Using awk to parse Apache log file and extract visitor IP and HTTP status code, then sorting and counting occurrences
-awk '{print $1, $9}' apache-access.log | sort | uniq -c | sort -nr
+awk '{ print $1 " " $9}' apache-access.log | sort | uniq -c | sort -rn
