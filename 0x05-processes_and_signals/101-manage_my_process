@@ -1,50 +1,27 @@
 #!/usr/bin/env bash
+# Manage my process
 
-# Path to manage_my_process script
-SCRIPT_PATH="/path/to/manage_my_process"
+file=/var/run/my_process.pid
 
-# Function to start manage_my_process
-start() {
-    # Start manage_my_process
-    "$SCRIPT_PATH" &
-    PID=$!
-    echo "$PID" > /var/run/my_process.pid
-    echo "manage_my_process started"
-}
-
-# Function to stop manage_my_process
-stop() {
-    # Stop manage_my_process if it's running
-    if [[ -f /var/run/my_process.pid ]]; then
-        PID=$(cat /var/run/my_process.pid)
-        kill "$PID"
-        rm -f /var/run/my_process.pid
-        echo "manage_my_process stopped"
-    else
-        echo "manage_my_process is not running"
-    fi
-}
-
-# Function to restart manage_my_process
-restart() {
-    stop
-    start
-    echo "manage_my_process restarted"
-}
-
-# Main script
-case "$1" in
-    start)
-        start
-        ;;
-    stop)
-        stop
-        ;;
-    restart)
-        restart
-        ;;
-    *)
-        echo "Usage: $0 {start|stop|restart}"
-        exit 1
-        ;;
-esac
+if [ "${1}" == "start" ]
+then
+	./manage_my_process &
+	touch "$file"
+	echo "$!" > "$file"
+	echo "manage_my_process started"
+elif [ "${1}" == "stop" ]
+then
+	echo "manage_my_process stopped"
+	kill "$(cat "$file")"
+	rm "$file"
+elif [ "${1}" == "restart" ]
+then
+	kill "$(cat $file")"
+	rm $file"
+	./manage_my_process &
+	touch $file"
+	echo "$!" > $file"
+	echo "manage_my_process restarted"
+else
+	echo "Usage: manage_my_process {start|stop|restart}"
+fi
