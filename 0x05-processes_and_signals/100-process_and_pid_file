@@ -2,6 +2,7 @@
 #Creates the file /var/run/myscript.pid containing its PID
 
 file=/var/run/myscript.pid
+script="rm $file && exit"
 
 echo "$$" > $file
 
@@ -9,7 +10,7 @@ while true
 do
 	echo "To infinity and beyond"
 	sleep 2
-	trap 'echo "I hate the kill command"' SIGTERM
+	trap 'echo "I hate the kill command && $script"' SIGTERM
 	trap 'echo "Y U no love me?!"' SIGINT
-	trap 'rm $file && exit' SIGQUITgit SIGTERM
+	trap '$script' SIGQUIT
 done
