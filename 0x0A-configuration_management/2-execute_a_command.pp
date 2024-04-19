@@ -2,8 +2,7 @@
 # 2-execute_a_command.pp
 # kill_process.pp
 
-exec { 'Kill killmenow process':
-  command     => 'pkill -f killmenow',
-  path        => ['/bin', '/usr/bin'],
-  refreshonly => true,
+exec { 'Kill a process':
+  command => 'pkill killmenow',
+  path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games',
 }
