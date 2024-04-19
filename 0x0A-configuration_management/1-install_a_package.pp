@@ -1,8 +1,7 @@
-# 1-install_a_package.pp
+# 1-install_werzeug.pp
 
-# Install the puppet-lint package
-package { 'puppet-lint':
-  ensure   => '2.5.0',
-  provider => 'gem',
+# Install the werzeug package using pip3
+package { 'werzeug':
+  ensure   => 'latest',
+  provider => 'pip3',
 }
-
