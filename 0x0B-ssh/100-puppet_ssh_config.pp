@@ -1,20 +1,13 @@
-#!/usr/bin/env bash
+# puppet module install puppetlabs-stdlib
 
-# Ensure the SSH client configuration file exists
-file { '/etc/ssh/ssh_config':
-  ensure  => present,
-}
-
-# Turn off password authentication
-file_line { 'Turn off password authentication':
+file_line { 'refuse_to_authenticate_using_a_password':
+  ensure => present,
   path   => '/etc/ssh/ssh_config',
-  line   => 'PasswordAuthentication no',
-  match  => '^#?\s*PasswordAuthentication',
+  line   => '  PasswordAuthentication no',
 }
 
-# Declare identity file
-file_line { 'Declare identity file':
-  path    => '/etc/ssh/ssh_config',
-  line    => 'IdentityFile ~/.ssh/school',
-  match   => '^#?\s*IdentityFile',
+file_line { 'IdentityFile':
+  ensure => present,
+  path   => '/etc/ssh/ssh_config',
+  line   => '  IdentityFile ~/.ssh/school',
 }
