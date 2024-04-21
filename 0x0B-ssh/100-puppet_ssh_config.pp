@@ -1,12 +1,16 @@
+#!/usr/bin/env bash
+#use puppet to connect to the remote server
+
 file { '/etc/ssh/ssh_config':
   ensure  => present,
-  content =>
-    "${file('/etc/ssh/ssh_config')}Host web-01
-        HostName 54.237.93.225
-        ServerAliveInterval 120
-        IdentityFile ~/.ssh/school
-        PasswordAuthentication no",
-  owner   => 'itsfoss',
-  group   => 'itsfoss',
-  mode    => '0744'
+}
+file{ 'Turn off password authentication':
+  path   => '/etc/ssh/ssh_config',
+  line   => 'PasswordAuthentication no',
+  match  => '^#PasswordAuthentication',
+}
+file_line { 'Declare identity file':
+  path    => '/etc/ssh/ssh_config',
+  line    => 'IdentityFile ~/.ssh/school',
+  match   => '^#IdentityFile',
 }
