@@ -1,16 +1,20 @@
 #!/usr/bin/env bash
-#use puppet to connect to the remote server
 
+# Ensure the SSH client configuration file exists
 file { '/etc/ssh/ssh_config':
   ensure  => present,
 }
-file{ 'Turn off password authentication':
+
+# Turn off password authentication
+file_line { 'Turn off password authentication':
   path   => '/etc/ssh/ssh_config',
   line   => 'PasswordAuthentication no',
-  match  => '^#PasswordAuthentication',
+  match  => '^#?\s*PasswordAuthentication',
 }
+
+# Declare identity file
 file_line { 'Declare identity file':
   path    => '/etc/ssh/ssh_config',
   line    => 'IdentityFile ~/.ssh/school',
-  match   => '^#IdentityFile',
+  match   => '^#?\s*IdentityFile',
 }
