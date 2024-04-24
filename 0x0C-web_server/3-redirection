@@ -1,10 +1,20 @@
 #!/usr/bin/env bash
 # Bash script that configures a new Ubuntu machine to respect the requirements
 
-sudo su
-apt-get -y update
-apt-get -y install nginx
-ufw allow 'Nginx HTTP'
-echo 'Hello World!' > /var/www/html/index.html
-sed -i '24i\	rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
-service nginx start
+# Update package index
+sudo apt-get update
+
+# Install Nginx
+sudo apt-get -y install nginx
+
+# Allow Nginx through firewall
+sudo ufw allow 'Nginx HTTP'
+
+# Create index.html with "Hello World!"
+echo 'Hello World!' | sudo tee /var/www/html/index.html > /dev/null
+
+# Configure nginx to redirect /redirect_me to YouTube video
+sudo sed -i '/^}/i \ \ \ \ location /redirect_me {\n \ \ \ \ \ \ \ \ rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;\n \ \ \ \ }' /etc/nginx/sites-available/default
+
+# Restart Nginx
+sudo service nginx restart
