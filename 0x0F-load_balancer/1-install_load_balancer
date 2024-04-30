@@ -3,7 +3,7 @@
 sudo apt-get -y update
 sudo apt-get -y install haproxy
 sudo bash -c 'echo "
-frontend ramfront
+frontend ramweb
     bind *:80
     mode http
     default_backend metoback
