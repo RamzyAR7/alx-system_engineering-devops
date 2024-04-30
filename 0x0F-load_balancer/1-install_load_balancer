@@ -6,7 +6,7 @@ sudo bash -c 'echo "
 frontend ramweb
     bind *:80
     mode http
-    default_backend metoback
+    default_backend ramback
 backend ramback
     balance roundrobin
     server 350396-web-01 54.237.93.225:80 check
