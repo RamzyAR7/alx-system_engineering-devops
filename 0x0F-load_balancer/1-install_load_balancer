@@ -3,11 +3,11 @@
 sudo apt-get -y update
 sudo apt-get -y install haproxy
 sudo bash -c 'echo "
-frontend metoweb
+frontend ramfront
     bind *:80
     mode http
     default_backend metoback
-backend metoback
+backend ramback
     balance roundrobin
     server 350396-web-01 54.237.93.225:80 check
     server 350396-web-02 54.172.137.10:80 check" >> /etc/haproxy/haproxy.cfg'
