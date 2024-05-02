@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# installs appache and starts it
+echo "ramzy" > /var/run/nginx.pid
+echo "ramzy" > /run/nginx.pid
