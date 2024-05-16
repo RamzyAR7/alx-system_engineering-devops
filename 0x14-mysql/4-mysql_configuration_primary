@@ -1,0 +1,4 @@
+# Primary Server Configuration (web-01)
+
+# Comment out bind-address to listen on all interfaces
+# bind-address = 127.0.0.1
