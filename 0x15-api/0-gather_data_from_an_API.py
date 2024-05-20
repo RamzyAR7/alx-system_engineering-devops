@@ -17,13 +17,13 @@ if __name__ == "__main__":
             j_req = requests.get(
                 "{}todos?userId={}".format(
                     url, user)).json()
-            alltsk = len(j_req)
-            completedtsk = []
+            all_tsk = len(j_req)
+            completed_tsk = []
             for t in j_req:
                 if t.get("completed") is True:
-                    completedtsk.append(t)
-            count = len(completedtsk)
+                    completed_tsk.append(t)
+            count = len(completed_tsk)
             print("Employee {} is done with tasks({}/{}):"
-                  .format(name, count, alltsk))
-            for title in completedtsk:
+                  .format(name, count, all_tsk))
+            for title in completed_tsk:
                 print("\t {}".format(title.get("title")))
