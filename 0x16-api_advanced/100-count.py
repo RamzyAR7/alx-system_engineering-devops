@@ -7,6 +7,14 @@ from collections import Counter
 
 
 def count_words(subreddit, word_list, hot_list=[], after=None, counts=None):
+    '''Prints counts of given words found in hot posts of a given subreddit.
+
+    Args:
+        subreddit (str): The subreddit to search.
+        word_list (list): The list of words to search for in post titles.
+        found_list (obj): Key/value pairs of words/counts.
+        after (str): The parameter for the next page of the API results.
+    '''
     if counts is None:
         counts = Counter()
 
