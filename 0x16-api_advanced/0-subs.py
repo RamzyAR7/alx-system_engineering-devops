@@ -7,6 +7,9 @@ import requests
 
 def number_of_subscribers(subreddit):
     """URL for the subreddit's about.json endpoint"""
+    if subreddit is None or type(subreddit) is not str:
+        return 0
+
     url = f'https://www.reddit.com/r/{subreddit}/about.json'
     headers = {'User-Agent': 'Mozilla/5.0'}
     
